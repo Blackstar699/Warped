@@ -17,7 +17,7 @@ int main(){
 
     //set global
     string path = "../../";
-    int display_key = 0;  //définit la partie du jeu qui doit être affichée: 0 = accueil, 1 = menu principal, 10 = jeu
+    int display_key = 0;  //définit la partie du jeu qui doit être affichée: 0 = accueil, 1 = menu principal, 10 = jeu, 11 = gameover
     int difficulty_value = 2;
 
     //set home/menu
@@ -29,6 +29,7 @@ int main(){
     //set game
     sf::View player_view;
     Player player;
+    vector<PlayerShoots> player_shoots;
     std::map<std::pair<int, int>, int> map1_1 = getMap(path + "resources/maps/map1_1.csv");
     vector<int> tileset1_walls = {25, 31, 32, 37, 43, 44, 49, 55, 56, 67, 68};
     vector<int> tileset1_grounds = {103, 104, 105};
@@ -51,12 +52,11 @@ int main(){
                 if(display_key == 0)
                     homeEvents(event, display_key, shapes_clock);
                 else if(display_key == 2)
-                    menuEvents(event, display_key, difficulty_value, menu_clic_position, player.clock);
+                    menuEvents(event, display_key, difficulty_value, menu_clic_position, player);
             }
         }
 
         window.clear();
-
         switch(display_key){
             case 0:
                 home(window, home_alpha_value, home_clock);
@@ -73,7 +73,6 @@ int main(){
             case 10:
                 ///////////////////////////////////////////////////////////////////////////////////
                 ///////////////////////////////////////////////////////////////////////////////////
-                window.setView(window.getDefaultView());
                 background(window, path + "resources/Sprites/game/background-back-city.png");
 
                 setPlayerView(player_view, screen_size, player.pos);
@@ -81,12 +80,22 @@ int main(){
                 window.setView(player_view);
                 environment(window, map1_1);
                 environment(window, map1_2);
-                gameEvents(player);
+                gameEvents(player, player_shoots);
                 playerCollisions(player, map1_1_walls, map1_1_grounds, map1_1_ladders);
+                ///props (powerup, pièces, ...)
+                ///Ennemis
                 playerDisplay(window, player);
-                playerIsAlive(player.health);
+                ///tirs ennemis
+                playerShootsDisplay(window, player_shoots, player.pos, map1_1_walls);
+                window.setView(window.getDefaultView());
+                playerHUD(window, player);
+                playerIsAlive(player.health, display_key);
                 ///////////////////////////////////////////////////////////////////////////////////
                 ///////////////////////////////////////////////////////////////////////////////////
+                break;
+
+            case 11:
+                gameOverScreen(window, display_key);
                 break;
 
             default:

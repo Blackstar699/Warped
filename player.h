@@ -3,18 +3,14 @@
 
 #include "includes.h"
 #include "fonctions.h"
+#include "game.h"
+#include "PlayerShoots.h"
 
 void playerDisplay(sf::RenderWindow& window, Player& player);
-//void playerIdle(sf::Sprite& sprite, sf::Vector2i player_sprite);
-//void playerJump(sf::Sprite& sprite, sf::Vector2i player_sprite);
-//void playerRun(sf::Sprite& sprite, sf::Vector2i player_sprite);
-//void playerRunShoot(sf::Sprite& sprite, sf::Vector2i player_sprite);
-//void playerCrouch(sf::Sprite& sprite, sf::Vector2i player_sprite);
-//void playerHurt(sf::Sprite& sprite, sf::Vector2i player_sprite);
-//void playerShoot(sf::Sprite& sprite, sf::Vector2i player_sprite);
-//void playerClimb(sf::Sprite& sprite, sf::Vector2i player_sprite);
 void playerReset(vector<int>& sprite_x, int sprite_y);
-void playerIsAlive(int player_health);
+void playerIsAlive(int player_health, int& display_key);
 void playerCollisions(Player& player, vector<sf::Vector2i>& walls, vector<sf::Vector2i>& grounds, vector<sf::Vector2i>& ladders);
+void playerHUD(sf::RenderWindow& window, Player& player);
+void playerShootsDisplay(sf::RenderWindow& window, vector<PlayerShoots>& player_shoots, sf::Vector2f player_pos, vector<sf::Vector2i>& walls);
 
 #endif //WARPED_PLAYER_H

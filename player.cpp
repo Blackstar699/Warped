@@ -9,11 +9,13 @@ void playerDisplay(sf::RenderWindow& window, Player& player){
 
     playerReset(player.sprite_x, player.sprite_y);
 
-    if(player.update){
-        if(player.sprite_x[player.sprite_y] == player.spritesheet[player.sprite_y]-1)
-            player.sprite_x[player.sprite_y] = 0;
-        else
-            player.sprite_x[player.sprite_y]++;
+    if(!player.jump || player.sprite_x[player.sprite_y] != 3){
+        if(player.update){
+            if(player.sprite_x[player.sprite_y] == player.spritesheet[player.sprite_y]-1)
+                player.sprite_x[player.sprite_y] = 0;
+            else
+                player.sprite_x[player.sprite_y]++;
+        }
     }
 
     sf::Texture psg_T = loadTexture(path + "resources/Sprites/game/player.png");
@@ -41,9 +43,9 @@ void playerReset(vector<int>& sprite_x, int sprite_y){
 
 
 ///vérifie si le joueur est encore en vie et déclenche la fin de la partie si ce n'est pas le cas
-void playerIsAlive(int player_health){
+void playerIsAlive(int player_health, int& display_key){
     if(player_health <= 0){
-        ///fonction gameover
+        gameOver(display_key);
     }
 }
 
@@ -53,7 +55,7 @@ void playerCollisions(Player& player, vector<sf::Vector2i>& walls, vector<sf::Ve
     player.onground = false;
     player.ladder = false;
 
-    //vérification pour sol
+    //vérification sols
     for(auto& block : grounds){
         if(((block.x > (player.pos.x + player.size.x / 2) - 24 && block.x < (player.pos.x + player.size.x / 2) + 24) ||
         (block.x + 32.f > (player.pos.x + player.size.x / 2) - 24 && block.x + 32.f < (player.pos.x + player.size.x / 2) + 24)) &&
@@ -103,5 +105,60 @@ void playerCollisions(Player& player, vector<sf::Vector2i>& walls, vector<sf::Ve
             }
             break;
         }
+    }
+}
+
+
+///affiche les informations du joueur pendant la partie, comme la vie ou le temps écoulé
+void playerHUD(sf::RenderWindow& window, Player& player){
+    string path = "../../";
+    player.game_time = player.game_clock.getElapsedTime().asSeconds();
+    int mins = floor(player.game_time / 60);
+    int secs = floor(player.game_time - 60 * mins);
+    string game_time;
+    game_time += std::to_string(mins);
+    game_time += " : ";
+    game_time += std::to_string(secs);
+
+    sf::RectangleShape hp1(sf::Vector2f(304, 24));
+    hp1.setFillColor(sf::Color::White);
+    hp1.setPosition(sf::Vector2f(10, 10));
+    sf::RectangleShape hp2(sf::Vector2f(player.health * 3, 20));
+    hp2.setFillColor(sf::Color::Red);
+    hp2.setPosition(sf::Vector2f(12, 12));
+
+    sf::Font font;
+    if(!font.loadFromFile(path + "resources/BalooBhaina2-Medium.ttf"))
+        cerr << "erreur chargement font" << endl;
+    sf::Text gametime;
+    gametime.setFont(font);
+    gametime.setString(game_time);
+    gametime.setCharacterSize(25);
+    gametime.setFillColor(sf::Color::White);
+    gametime.setPosition(sf::Vector2f(10, 40));
+
+    window.draw(hp1);
+    window.draw(hp2);
+    window.draw(gametime);
+}
+
+
+///affichage des tirs du joueur
+void playerShootsDisplay(sf::RenderWindow& window, vector<PlayerShoots>& player_shoots, sf::Vector2f player_pos, vector<sf::Vector2i>& walls){
+    int pos = 0;
+
+    vector<int> deletes;
+    for(auto& shoot : player_shoots){
+        shoot.collisions(walls);
+        bool delete_shoot1 = shoot.isOnScreen(player_pos);
+        bool delete_shoot2 = shoot.display(window);
+        shoot.move();
+        if(!delete_shoot1 || delete_shoot2)
+            deletes.push_back(pos);
+        pos++;
+    }
+
+    for(auto& shoot : deletes){
+        player_shoots.erase(player_shoots.begin() + shoot);
     }
 }

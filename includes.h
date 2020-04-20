@@ -6,8 +6,6 @@
 ///#include <SFML/Audio.hpp>
 using std::cout, std::cerr, std::endl, std::string, std::vector;
 
-//string path = "../../";
-
 struct Player{
     sf::Vector2f size;
     sf::Vector2f pos;
@@ -23,7 +21,11 @@ struct Player{
     vector<int> spritesheet;
     int sprite_y;
     vector<int> sprite_x;
+    int coins;
+    float game_time;
     sf::Clock clock;
+    sf::Clock game_clock;
+    sf::Clock shoot_clock;
 
     Player(){
         size.x = 142;
@@ -42,6 +44,8 @@ struct Player{
         spritesheet = {4, 4, 4, 4, 8, 8, 8, 8, 1, 1, 1, 1, 1, 1, 6};
         sprite_y = 0;
         sprite_x = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        coins = 0;
+        game_time = 0;
     }
 };
 
