@@ -14,21 +14,15 @@ void PlayerShoots::move(){
 }
 
 ///affiche le tir/impact à la bonne position en fonction de s'il y a un impact ou non
-bool PlayerShoots::display(sf::RenderWindow& window){
-    string path = "../../";
-
+bool PlayerShoots::display(sf::RenderWindow& window, sf::Sprite& sprite_1, sf::Sprite& sprite_2){
     if(!hit){
-        sf::Texture texture = loadTexture(path + "resources/Sprites/game/player_shoot.png");
-        sf::Sprite sprite(texture);
-        sprite.setPosition(sf::Vector2f(pos.x, pos.y + 2));
-        window.draw(sprite);
+        sprite_1.setPosition(sf::Vector2f(pos.x, pos.y + 2));
+        window.draw(sprite_1);
     }
     else{
-        sf::Texture texture = loadTexture(path + "resources/Sprites/game/player_shoot_impact.png");
-        sf::Sprite sprite(texture);
-        sprite.setTextureRect(sf::IntRect(hit_sprite * 12, direction * 12, 12, 12));
-        sprite.setPosition(sf::Vector2f(pos.x, pos.y - 2));
-        window.draw(sprite);
+        sprite_2.setTextureRect(sf::IntRect(hit_sprite * 12, direction * 12, 12, 12));
+        sprite_2.setPosition(sf::Vector2f(pos.x, pos.y - 2));
+        window.draw(sprite_2);
         hit_sprite++;
     }
 

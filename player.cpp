@@ -1,9 +1,7 @@
 #include "player.h"
 
 ///affiche la sprite du joueur correspondante à l'animation en cours
-void playerDisplay(sf::RenderWindow& window, Player& player){
-    string path = "../../";
-
+void playerDisplay(sf::RenderWindow& window, Player& player, sf::Texture& psg){
     if(player.sprite_y < 14 && player.direction == 1)
         player.sprite_y += 1;
 
@@ -18,11 +16,10 @@ void playerDisplay(sf::RenderWindow& window, Player& player){
         }
     }
 
-    sf::Texture psg_T = loadTexture(path + "resources/Sprites/game/player.png");
-    sf::Sprite psg(psg_T);
-    psg.setTextureRect(sf::IntRect(player.sprite_x[player.sprite_y] * 142, player.sprite_y * 134, 142, 134));
-    psg.setPosition(player.pos.x, player.pos.y);
-    window.draw(psg);
+    sf::Sprite psg_s(psg);
+    psg_s.setTextureRect(sf::IntRect(player.sprite_x[player.sprite_y] * 142, player.sprite_y * 134, 142, 134));
+    psg_s.setPosition(player.pos.x, player.pos.y);
+    window.draw(psg_s);
 }
 
 
@@ -88,8 +85,8 @@ void playerCollisions(Player& player, vector<sf::Vector2i>& walls, vector<sf::Ve
 
     //vérification échelles
     for(auto& block : ladders){
-        if(((block.x > (player.pos.x + player.size.x / 2) - 20 && block.x < (player.pos.x + player.size.x / 2) + 20) ||
-        (block.x + 32.f > (player.pos.x + player.size.x / 2) - 20 && block.x + 32.f < (player.pos.x + player.size.x / 2) + 20)) &&
+        if(((block.x > (player.pos.x + player.size.x / 2) - 18 && block.x < (player.pos.x + player.size.x / 2) + 18) ||
+        (block.x + 32.f > (player.pos.x + player.size.x / 2) - 18 && block.x + 32.f < (player.pos.x + player.size.x / 2) + 18)) &&
         ((block.y > player.pos.y && block.y <= player.pos.y + player.size.y) ||
         (block.y + 32.f > player.pos.y && block.y + 32.f < player.pos.y + player.size.y))){
             player.ladder = true;
@@ -100,7 +97,6 @@ void playerCollisions(Player& player, vector<sf::Vector2i>& walls, vector<sf::Ve
                 }
                 if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)){
                     player.ladder = false;
-
                 }
             }
             break;
@@ -144,14 +140,16 @@ void playerHUD(sf::RenderWindow& window, Player& player){
 
 
 ///affichage des tirs du joueur
-void playerShootsDisplay(sf::RenderWindow& window, vector<PlayerShoots>& player_shoots, sf::Vector2f player_pos, vector<sf::Vector2i>& walls){
+void playerShootsDisplay(sf::RenderWindow& window, vector<PlayerShoots>& player_shoots, sf::Vector2f player_pos, bool player_update, vector<sf::Vector2i>& walls, sf::Texture& texture_1, sf::Texture& texture_2){
     int pos = 0;
+    sf::Sprite sprite_1(texture_1);
+    sf::Sprite sprite_2(texture_2);
 
     vector<int> deletes;
     for(auto& shoot : player_shoots){
         shoot.collisions(walls);
         bool delete_shoot1 = shoot.isOnScreen(player_pos);
-        bool delete_shoot2 = shoot.display(window);
+        bool delete_shoot2 = shoot.display(window, sprite_1, sprite_2);
         shoot.move();
         if(!delete_shoot1 || delete_shoot2)
             deletes.push_back(pos);

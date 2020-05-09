@@ -2,8 +2,7 @@
 
 ///appliqué si la partie est perdu (en cas de mort du joueur)
 void gameOver(int& display_key){
-    sf::Clock clock;
-    while(clock.getElapsedTime().asSeconds() < 1){}
+    sf::sleep(sf::seconds(1));
     display_key = 11;
     cout << "Game Over" << endl;
 }

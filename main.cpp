@@ -16,7 +16,7 @@ int main(){
     window.setPosition(sf::Vector2i(360, 190));
 
     //set global
-    string path = "../../";
+    string path = "../../resources/";
     int display_key = 0;  //définit la partie du jeu qui doit être affichée: 0 = accueil, 1 = menu principal, 10 = jeu, 11 = gameover
     int difficulty_value = 2;
 
@@ -30,14 +30,33 @@ int main(){
     sf::View player_view;
     Player player;
     vector<PlayerShoots> player_shoots;
-    std::map<std::pair<int, int>, int> map1_1 = getMap(path + "resources/maps/map1_1.csv");
+    std::map<std::pair<int, int>, int> map1_1 = getMap(path + "maps/map1_1.csv");
     vector<int> tileset1_walls = {25, 31, 32, 37, 43, 44, 49, 55, 56, 67, 68};
     vector<int> tileset1_grounds = {103, 104, 105};
     vector<int> tileset1_ladders = {2, 14};
     vector<sf::Vector2i> map1_1_walls = untraversablesTileset1(map1_1, tileset1_walls);
     vector<sf::Vector2i> map1_1_grounds = untraversablesTileset1(map1_1, tileset1_grounds);
     vector<sf::Vector2i> map1_1_ladders = untraversablesTileset1(map1_1, tileset1_ladders);
-    std::map<std::pair<int, int>, int> map1_2 = getMap(path + "resources/maps/map1_2.csv");
+    std::map<std::pair<int, int>, int> map1_2 = getMap(path + "maps/map1_2.csv");
+    vector<sf::Texture> textures;
+    vector<string> files = {
+            "Sprites/home/background.png",
+            "Sprites/home/press-enter.png",
+            "Sprites/menu/background.png",
+            "Sprites/menu/play.png",
+            "Sprites/menu/difficulty.png",
+            "Sprites/menu/difficulties.png",
+            "Sprites/game/background-back-city.png",
+            "Sprites/game/tileset1.png",
+            "Sprites/game/player.png",
+            "Sprites/game/player_shoot.png",
+            "Sprites/game/player_shoot_impact.png"
+    };
+
+    for(const auto& file : files){
+        sf::Texture texture = loadTexture(path + file);
+        textures.push_back(texture);
+    }
 
 
     while(window.isOpen()){
@@ -59,7 +78,7 @@ int main(){
         window.clear();
         switch(display_key){
             case 0:
-                home(window, home_alpha_value, home_clock);
+                home(window, home_alpha_value, home_clock, textures[0], textures[1]);
                 break;
 
             case 1:
@@ -67,26 +86,26 @@ int main(){
                 break;
 
             case 2:
-                menu(window, menu_clic_position, difficulty_value);
+                menu(window, menu_clic_position, difficulty_value, textures[2], textures[3], textures[4], textures[5]);
                 break;
 
             case 10:
                 ///////////////////////////////////////////////////////////////////////////////////
                 ///////////////////////////////////////////////////////////////////////////////////
-                background(window, path + "resources/Sprites/game/background-back-city.png");
+                background(window, textures[6]);
 
                 setPlayerView(player_view, screen_size, player.pos);
 
                 window.setView(player_view);
-                environment(window, map1_1);
-                environment(window, map1_2);
+                environment(window, map1_1, player.pos, textures[7]);
+                environment(window, map1_2, player.pos, textures[7]);
                 gameEvents(player, player_shoots);
                 playerCollisions(player, map1_1_walls, map1_1_grounds, map1_1_ladders);
                 ///props (powerup, pièces, ...)
                 ///Ennemis
-                playerDisplay(window, player);
+                playerDisplay(window, player, textures[8]);
                 ///tirs ennemis
-                playerShootsDisplay(window, player_shoots, player.pos, map1_1_walls);
+                playerShootsDisplay(window, player_shoots, player.pos, player.update, map1_1_walls, textures[9], textures[10]);
                 window.setView(window.getDefaultView());
                 playerHUD(window, player);
                 playerIsAlive(player.health, display_key);

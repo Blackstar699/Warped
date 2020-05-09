@@ -1,24 +1,20 @@
 #include "environment.h"
 
 ///affiche le background du jeu
-void background(sf::RenderWindow& window, const string& file){
-    sf::Texture background_game_T = loadTexture(file);
-    sf::Sprite background_game(background_game_T);
-    background_game.setPosition(0,0);
-    window.draw(background_game);
+void background(sf::RenderWindow& window, sf::Texture& texture){
+    sf::Sprite sprite(texture);
+    sprite.setPosition(0,0);
+    window.draw(sprite);
 }
 
 
 ///affiche l'environnement correspondant aux données de la map en paramètre
-void environment(sf::RenderWindow& window, const std::map<std::pair<int, int>, int>& map){
-    string path = "../../";
-
-    sf::Texture tileset = loadTexture(path + "resources/Sprites/game/tileset1.png");
-    sf::Sprite sprite(tileset);
+void environment(sf::RenderWindow& window, const std::map<std::pair<int, int>, int>& map, sf::Vector2f player_pos, sf::Texture& texture){
+    sf::Sprite sprite(texture);
 
     for(auto& ligne : map){
         const int x = ligne.first.first, y = ligne.first.second, sprite_nbr = ligne.second;
-        if(sprite_nbr != -1){
+        if(sprite_nbr != -1 && !(x * 32 > player_pos.x + 1300 || x * 32 < player_pos.x - 1300 || y * 32 > player_pos.y + 500 || y * 32 < player_pos.y - 500)){
             sprite = tileset1(sprite, sprite_nbr);
             sprite.setPosition(sf::Vector2f(x * 32, y * 32));
             window.draw(sprite);

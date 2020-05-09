@@ -1,23 +1,19 @@
 #include "menus.h"
 
 
-void home(sf::RenderWindow& window, int& home_alpha_value, sf::Clock& clock){
-    string path = "../../";
-
+void home(sf::RenderWindow& window, int& home_alpha_value, sf::Clock& clock, sf::Texture& background, sf::Texture& enter){
     if(clock.getElapsedTime().asSeconds() >= 0.5){
         clock.restart();
         home_alpha_value *= -1;
     }
 
-    sf::Texture background_home_T = loadTexture(path + "resources/Sprites/home/background.png");
-    sf::Sprite background_home(background_home_T);
-    background_home.setPosition(0,0);
+    sf::Sprite background_s(background);
+    background_s.setPosition(0,0);
 
-    sf::Texture enter_T = loadTexture(path + "resources/Sprites/home/press-enter.png");
-    sf::Sprite enter(enter_T);
+    sf::Sprite enter_s(enter);
 
-    window.draw(background_home);
-    window.draw(homeEnterText(enter, home_alpha_value));
+    window.draw(background_s);
+    window.draw(homeEnterText(enter_s, home_alpha_value));
 }
 
 
@@ -62,30 +58,24 @@ void shapesDemo(sf::RenderWindow& window, sf::Clock& clock, int& display_key){
 }
 
 
-void menu(sf::RenderWindow& window, int clic_position, int difficulty_value){
-    string path = "../../";
+void menu(sf::RenderWindow& window, int clic_position, int difficulty_value, sf::Texture& background, sf::Texture& play, sf::Texture& difficulty, sf::Texture& difficulties){
+    sf::Sprite background_s(background);
+    background_s.setPosition(0,0);
 
-    sf::Texture menu_background_T = loadTexture(path + "resources/Sprites/menu/background.png");
-    sf::Sprite menu_background(menu_background_T);
-    menu_background.setPosition(0,0);
+    sf::Sprite play_s(play);
+    play_s.setScale(sf::Vector2f(0.75, 0.75));
+    play_s.setColor(sf::Color(0, 168, 243));
+    play_s.setPosition(50,150);
 
-    sf::Texture menu_play_T = loadTexture(path + "resources/Sprites/menu/play.png");
-    sf::Sprite menu_play(menu_play_T);
-    menu_play.setScale(sf::Vector2f(0.75, 0.75));
-    menu_play.setColor(sf::Color(0, 168, 243));
-    menu_play.setPosition(50,150);
+    sf::Sprite difficulty_s(difficulty);
+    difficulty_s.setScale(sf::Vector2f(0.75, 0.75));
+    difficulty_s.setPosition(50,210);
 
-    sf::Texture menu_difficulty_T = loadTexture(path + "resources/Sprites/menu/difficulty.png");
-    sf::Sprite menu_difficulty(menu_difficulty_T);
-    menu_difficulty.setScale(sf::Vector2f(0.75, 0.75));
-    menu_difficulty.setPosition(50,210);
-
-    sf::Texture menu_difficulties_T = loadTexture(path + "resources/Sprites/menu/difficulties.png");
-    sf::Sprite menu_difficulties(menu_difficulties_T);
-    menu_difficulties.setTextureRect(sf::IntRect(0, (56*difficulty_value)-56, 296, 56));
-    menu_difficulties.setScale(sf::Vector2f(0.75, 0.75));
-    menu_difficulties.setColor(sf::Color(0, 168, 243));  //236 28 36
-    menu_difficulties.setPosition(300,210);
+    sf::Sprite difficulties_s(difficulties);
+    difficulties_s.setTextureRect(sf::IntRect(0, (56*difficulty_value)-56, 296, 56));
+    difficulties_s.setScale(sf::Vector2f(0.75, 0.75));
+    difficulties_s.setColor(sf::Color(0, 168, 243));  //236 28 36
+    difficulties_s.setPosition(300,210);
 
 //            sf::Texture options_menu_T = loadTexture(path + "menu/options.png");
 //            sf::Sprite options_menu(options_menu_T);
@@ -98,15 +88,15 @@ void menu(sf::RenderWindow& window, int clic_position, int difficulty_value){
 //            scores_menu.setPosition(100,410);
 
     if(clic_position == 1){
-        menu_play.setColor(sf::Color(236, 28, 36));
+        play_s.setColor(sf::Color(236, 28, 36));
     } else if(clic_position == 2){
-        menu_difficulties.setColor(sf::Color(236, 28, 36));
+        difficulties_s.setColor(sf::Color(236, 28, 36));
     }
 
-    window.draw(menu_background);
-    window.draw(menu_play);
-    window.draw(menu_difficulty);
-    window.draw(menu_difficulties);
+    window.draw(background_s);
+    window.draw(play_s);
+    window.draw(difficulty_s);
+    window.draw(difficulties_s);
 //            window.draw(options_menu);
 //            window.draw(scores_menu);
 }

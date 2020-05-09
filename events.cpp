@@ -40,21 +40,13 @@ void menuEvents(sf::Event& event, int& display_key, int& difficulty_value, int& 
 
 
 void gameEvents(Player& player, vector<PlayerShoots>& player_shoots){
-    //détermine s'il faut update la sprite ou non
-//    if(!player.jump){
-        if(player.clock.getElapsedTime().asMilliseconds() >= 100){
-            player.update = true;
-            player.clock.restart();
-        } else
-            player.update = false;
-//    }
-//    if(player.jump){
-//        if(player.clock.getElapsedTime().asMilliseconds() >= 100){
-//            player.update = true;
-//            player.clock.restart();
-//        } else
-//            player.update = false;
-//    }
+    if(player.clock.getElapsedTime().asMilliseconds() >= 100){
+        player.update = true;
+        player.clock.restart();
+    } else{
+        player.update = false;
+    }
+
 
     bool shoot;
     if(player.shoot_clock.getElapsedTime().asMilliseconds() > 250){
@@ -84,7 +76,7 @@ void gameEvents(Player& player, vector<PlayerShoots>& player_shoots){
             if(!player.ladder){
                 player.pos.y += player.speed * 2;
                 player.fall++;
-                if(player.fall >= 15)
+                if(player.fall >= 35)
                     player.health = 0;
             }
         }
@@ -205,7 +197,7 @@ void gameEvents(Player& player, vector<PlayerShoots>& player_shoots){
                         player.jump = false;
                     else{
                         player.fall++;
-                        if(player.fall >= 15)
+                        if(player.fall >= 35)
                             player.health = 0;
                         if(sf::Keyboard::isKeyPressed(sf::Keyboard::X)){
                             if(shoot){

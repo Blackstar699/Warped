@@ -10,13 +10,13 @@ private:
     sf::Vector2f pos;
     //int damages{20};
     int direction;
-    int speed{30};
+    int speed{15};
     bool hit{false};
     int hit_sprite{0};
 public:
     explicit PlayerShoots(sf::Vector2f _pos, int _direction);
     void move();
-    bool display(sf::RenderWindow& window);
+    bool display(sf::RenderWindow& window, sf::Sprite& sprite_1, sf::Sprite& sprite_2);
     void collisions(vector<sf::Vector2i>& walls);
     bool isOnScreen(sf::Vector2f player_pos);
 };

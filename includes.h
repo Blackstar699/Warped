@@ -34,7 +34,7 @@ struct Player{
         pos.y = 0 - size.y;
         direction = 0;
         health = 100;
-        speed = 15;
+        speed = 7;
         onground = true;
         fall = 0;
         jump = false;
