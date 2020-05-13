@@ -49,6 +49,18 @@ void PlayerShoots::wallCollisions(vector<sf::Vector2i>& walls){
     }
 }
 
+///vérifie les collisions entre la balle et les ennemis
+void PlayerShoots::ennemiesCollisions(vector<Turrets> &turrets){
+    for(auto& turret : turrets){
+        bool hit_turret = turret.isHit(size, pos, damages);
+        if(hit_turret){
+            hit = true;
+            damages = 0;
+            break;
+        }
+    }
+}
+
 ///vérifie si la balle est toujours visible à l'écran
 bool PlayerShoots::isOnScreen(sf::Vector2f player_pos){
     if(pos.x > player_pos.x + 1300 || pos.x < player_pos.x - 1300)

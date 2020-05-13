@@ -33,7 +33,6 @@ int main(){
     vector<PlayerShoots> player_shoots;
     vector<Turrets> turrets;
     std::map<std::pair<int, int>, int> map1_turrets = getMap(path + "maps/map1_turrets.csv");
-    setTurrets(map1_turrets, turrets);
     std::map<std::pair<int, int>, int> map1_1 = getMap(path + "maps/map1_1.csv");
     vector<int> tileset1_walls = {25, 31, 32, 37, 43, 44, 49, 55, 56, 67, 68};
     vector<int> tileset1_grounds = {103, 104, 105};
@@ -77,7 +76,7 @@ int main(){
                 if(display_key == 0)
                     homeEvents(event, display_key, shapes_clock);
                 else if(display_key == 2)
-                    menuEvents(event, display_key, difficulty_value, menu_clic_position, player);
+                    menuEvents(event, display_key, difficulty_value, menu_clic_position, player, map1_turrets, turrets);
             }
         }
 
@@ -112,7 +111,7 @@ int main(){
                 ///Ennemis
                 playerDisplay(window, player, textures[8]);
                 ///tirs ennemis
-                playerShootsDisplay(window, player_shoots, player.pos, player.update, map1_1_walls, textures[9], textures[10]);
+                playerShootsDisplay(window, player_shoots, player.pos, map1_1_walls, textures[9], textures[10], turrets);
                 window.setView(window.getDefaultView());
                 playerHUD(window, player);
                 playerIsAlive(player.health, display_key);

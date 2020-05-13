@@ -3,12 +3,13 @@
 
 #include "includes.h"
 #include "fonctions.h"
+#include "ennemies.h"
 
 class PlayerShoots{
 private:
     sf::Vector2i size{12, 8};
     sf::Vector2f pos;
-    //int damages{20};
+    int damages{20};
     int direction;
     int speed{15};
     bool hit{false};
@@ -18,6 +19,7 @@ public:
     void move();
     bool display(sf::RenderWindow& window, sf::Sprite& sprite_1, sf::Sprite& sprite_2);
     void wallCollisions(vector<sf::Vector2i>& walls);
+    void ennemiesCollisions(vector<Turrets>& turrets);
     bool isOnScreen(sf::Vector2f player_pos);
 };
 

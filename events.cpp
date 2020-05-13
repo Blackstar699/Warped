@@ -9,7 +9,7 @@ void homeEvents(sf::Event& event, int& display_key, sf::Clock& clock){
 }
 
 
-void menuEvents(sf::Event& event, int& display_key, int& difficulty_value, int& menu_clic_position, Player& player){
+void menuEvents(sf::Event& event, int& display_key, int& difficulty_value, int& menu_clic_position, Player& player, std::map<std::pair<int, int>, int>& map1_turrets, vector<Turrets>& turrets){
     if(menu_clic_position == 1){
         if(event.key.code == sf::Keyboard::Enter){
             display_key = 10;
@@ -23,6 +23,7 @@ void menuEvents(sf::Event& event, int& display_key, int& difficulty_value, int& 
             player.game_time = 0;
             player.clock.restart();
             player.game_clock.restart();
+            setTurrets(map1_turrets, turrets, difficulty_value);
         }
         else if(event.key.code == sf::Keyboard::Down)
             menu_clic_position = 2;

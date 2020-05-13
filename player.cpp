@@ -140,7 +140,7 @@ void playerHUD(sf::RenderWindow& window, Player& player){
 
 
 ///affichage des tirs du joueur
-void playerShootsDisplay(sf::RenderWindow& window, vector<PlayerShoots>& player_shoots, sf::Vector2f player_pos, bool player_update, vector<sf::Vector2i>& walls, sf::Texture& texture_1, sf::Texture& texture_2){
+void playerShootsDisplay(sf::RenderWindow& window, vector<PlayerShoots>& player_shoots, sf::Vector2f player_pos, vector<sf::Vector2i>& walls, sf::Texture& texture_1, sf::Texture& texture_2, vector<Turrets>& turrets){
     int pos = 0;
     sf::Sprite sprite_1(texture_1);
     sf::Sprite sprite_2(texture_2);
@@ -150,6 +150,7 @@ void playerShootsDisplay(sf::RenderWindow& window, vector<PlayerShoots>& player_
     for(auto& shoot : player_shoots){
         shoot.wallCollisions(walls);
         bool delete_shoot1 = shoot.isOnScreen(player_pos);
+        shoot.ennemiesCollisions(turrets);
         bool delete_shoot2 = shoot.display(window, sprite_1, sprite_2);
         shoot.move();
         if(!delete_shoot1 || delete_shoot2)

@@ -47,9 +47,11 @@ void gameWin(){
 }
 
 ///rempli le vecteur des tourelles avec le fichier csv correspondant
-void setTurrets(std::map<std::pair<int, int>, int>& map1_turrets, vector<Turrets>& turrets){
+void setTurrets(std::map<std::pair<int, int>, int>& map1_turrets, vector<Turrets>& turrets, int difficulty_value){
+    turrets = {};
+
     for(auto& turret : map1_turrets){
         const float x = turret.first.first, y = turret.first.second;
-        turrets.push_back(Turrets({x * 32, y * 32 - 14}));
+        turrets.push_back(Turrets({x * 32, y * 32 - 14}, difficulty_value));
     }
 }
