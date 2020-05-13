@@ -3,6 +3,7 @@
 #include "menus.h"
 #include "environment.h"
 #include "player.h"
+#include "ennemies.h"
 
 
 int main(){
@@ -30,6 +31,9 @@ int main(){
     sf::View player_view;
     Player player;
     vector<PlayerShoots> player_shoots;
+    vector<Turrets> turrets;
+    std::map<std::pair<int, int>, int> map1_turrets = getMap(path + "maps/map1_turrets.csv");
+    setTurrets(map1_turrets, turrets);
     std::map<std::pair<int, int>, int> map1_1 = getMap(path + "maps/map1_1.csv");
     vector<int> tileset1_walls = {25, 31, 32, 37, 43, 44, 49, 55, 56, 67, 68};
     vector<int> tileset1_grounds = {103, 104, 105};
@@ -50,7 +54,9 @@ int main(){
             "Sprites/game/tileset1.png",
             "Sprites/game/player.png",
             "Sprites/game/player_shoot.png",
-            "Sprites/game/player_shoot_impact.png"
+            "Sprites/game/player_shoot_impact.png",
+            "Sprites/game/enemy-explosion.png",
+            "Sprites/game/turret.png"
     };
 
     for(const auto& file : files){
@@ -102,6 +108,7 @@ int main(){
                 gameEvents(player, player_shoots);
                 playerCollisions(player, map1_1_walls, map1_1_grounds, map1_1_ladders);
                 ///props (powerup, pièces, ...)
+                turretsDisplay(window, turrets, player, textures[12], textures[11]);
                 ///Ennemis
                 playerDisplay(window, player, textures[8]);
                 ///tirs ennemis

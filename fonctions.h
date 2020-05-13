@@ -6,6 +6,5 @@
 
 sf::Texture loadTexture(const std::string& filename);
 std::map<std::pair<int, int>, int> getMap(const string& fileName);
-void setSprites(vector<sf::Sprite>& sprites);
 
 #endif //WARPED_FONCTIONS_H

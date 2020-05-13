@@ -45,3 +45,11 @@ void gameOverScreen(sf::RenderWindow& window, int& display_key){
 void gameWin(){
 
 }
+
+///rempli le vecteur des tourelles avec le fichier csv correspondant
+void setTurrets(std::map<std::pair<int, int>, int>& map1_turrets, vector<Turrets>& turrets){
+    for(auto& turret : map1_turrets){
+        const float x = turret.first.first, y = turret.first.second;
+        turrets.push_back(Turrets({x * 32, y * 32 - 14}));
+    }
+}

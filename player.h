@@ -2,7 +2,6 @@
 #define WARPED_PLAYER_H
 
 #include "includes.h"
-#include "fonctions.h"
 #include "game.h"
 #include "PlayerShoots.h"
 

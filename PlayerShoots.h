@@ -17,7 +17,7 @@ public:
     explicit PlayerShoots(sf::Vector2f _pos, int _direction);
     void move();
     bool display(sf::RenderWindow& window, sf::Sprite& sprite_1, sf::Sprite& sprite_2);
-    void collisions(vector<sf::Vector2i>& walls);
+    void wallCollisions(vector<sf::Vector2i>& walls);
     bool isOnScreen(sf::Vector2f player_pos);
 };
 

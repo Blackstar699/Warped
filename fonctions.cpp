@@ -36,28 +36,3 @@ std::map<std::pair<int, int>, int> getMap(const string& fileName){
     cout << "OK" << endl;
     return map;
 }
-
-
-///Stock tous les sprites utiles au jeu dans un vector, qui sera ensuite donné en référence aux différentes fonctions
-void setSprites(vector<sf::Sprite>& sprites){
-    string path = "../../resources/Sprites/";
-    vector<string> files = {
-            "home/background.png",
-            "home/press-enter.png",
-            "menu/background.png",
-            "menu/play.png",
-            "menu/difficulty.png",
-            "menu/difficulties.png",
-            "game/background-back-city.png",
-            "game/tileset1.png",
-            "game/player.png",
-            "game/player_shoot.png",
-            "game/player_shoot_impact.png"
-    };
-
-    for(const auto& file : files){
-        sf::Texture texture = loadTexture(path + file);
-        sf::Sprite sprite(texture);
-        sprites.push_back(sprite);
-    }
-}

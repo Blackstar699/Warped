@@ -146,8 +146,9 @@ void playerShootsDisplay(sf::RenderWindow& window, vector<PlayerShoots>& player_
     sf::Sprite sprite_2(texture_2);
 
     vector<int> deletes;
+
     for(auto& shoot : player_shoots){
-        shoot.collisions(walls);
+        shoot.wallCollisions(walls);
         bool delete_shoot1 = shoot.isOnScreen(player_pos);
         bool delete_shoot2 = shoot.display(window, sprite_1, sprite_2);
         shoot.move();

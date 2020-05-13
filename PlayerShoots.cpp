@@ -29,8 +29,8 @@ bool PlayerShoots::display(sf::RenderWindow& window, sf::Sprite& sprite_1, sf::S
     return hit_sprite >= 4;
 }
 
-///Vérifie les collisions entre la balle et les murs/ennemis
-void PlayerShoots::collisions(vector<sf::Vector2i>& walls){
+///Vérifie les collisions entre la balle et les murs
+void PlayerShoots::wallCollisions(vector<sf::Vector2i>& walls){
     if(!hit){
         for(auto& wall : walls){
             if(((pos.x < wall.x && pos.x + size.x > wall.x) ||
