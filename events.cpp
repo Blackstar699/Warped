@@ -20,6 +20,7 @@ void menuEvents(sf::Event& event, int& display_key, int& difficulty_value, int& 
             player.health = 100;
             player.fall = 0;
             player.coins = 0;
+            player.points = 0;
             player.game_time = 0;
             player.clock.restart();
             player.game_clock.restart();
@@ -108,9 +109,9 @@ void gameEvents(Player& player, vector<PlayerShoots>& player_shoots){
                             if(shoot){
                                 player.shoot_clock.restart();
                                 if(player.direction == 0)
-                                    player_shoots.push_back(PlayerShoots({player.pos.x + 108, player.pos.y + 84}, player.direction));
+                                    player_shoots.push_back(PlayerShoots({player.pos.x + 108, player.pos.y + 84}, player.direction, 15));
                                 else
-                                    player_shoots.push_back(PlayerShoots({player.pos.x + 34 - 6, player.pos.y + 84}, player.direction));
+                                    player_shoots.push_back(PlayerShoots({player.pos.x + 34 - 6, player.pos.y + 84}, player.direction, 15));
                             }
                         }
                     }
@@ -122,7 +123,7 @@ void gameEvents(Player& player, vector<PlayerShoots>& player_shoots){
 //                            cout << "x: " << player.pos.x << endl;
                             if(shoot){
                                 player.shoot_clock.restart();
-                                player_shoots.push_back(PlayerShoots({player.pos.x + 126, player.pos.y + 56}, player.direction));
+                                player_shoots.push_back(PlayerShoots({player.pos.x + 126, player.pos.y + 56}, player.direction, 15));
                             }
                         }
                         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
@@ -134,7 +135,7 @@ void gameEvents(Player& player, vector<PlayerShoots>& player_shoots){
 //                            cout << "x: " << player.pos.x << endl;
                             if(shoot){
                                 player.shoot_clock.restart();
-                                player_shoots.push_back(PlayerShoots({player.pos.x + 16 - 6, player.pos.y + 56}, player.direction));
+                                player_shoots.push_back(PlayerShoots({player.pos.x + 16 - 6, player.pos.y + 56}, player.direction, 15));
                             }
                         }
                         if(!sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
@@ -142,9 +143,9 @@ void gameEvents(Player& player, vector<PlayerShoots>& player_shoots){
                             if(shoot){
                                 player.shoot_clock.restart();
                                 if(player.direction == 0)
-                                    player_shoots.push_back(PlayerShoots({player.pos.x + 110, player.pos.y + 48}, player.direction));
+                                    player_shoots.push_back(PlayerShoots({player.pos.x + 110, player.pos.y + 48}, player.direction, 15));
                                 else
-                                    player_shoots.push_back(PlayerShoots({player.pos.x + 32 - 6, player.pos.y + 48}, player.direction));
+                                    player_shoots.push_back(PlayerShoots({player.pos.x + 32 - 6, player.pos.y + 48}, player.direction, 15));
                             }
                         }
                     }
@@ -204,9 +205,9 @@ void gameEvents(Player& player, vector<PlayerShoots>& player_shoots){
                             if(shoot){
                                 player.shoot_clock.restart();
                                 if(player.direction == 0)
-                                    player_shoots.push_back(PlayerShoots({player.pos.x + 114, player.pos.y + 50}, player.direction));
+                                    player_shoots.push_back(PlayerShoots({player.pos.x + 114, player.pos.y + 50}, player.direction, 15));
                                 else
-                                    player_shoots.push_back(PlayerShoots({player.pos.x + 28 - 6, player.pos.y + 50}, player.direction));
+                                    player_shoots.push_back(PlayerShoots({player.pos.x + 28 - 6, player.pos.y + 50}, player.direction, 15));
                             }
                         }
                     }

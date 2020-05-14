@@ -27,37 +27,6 @@ sf::Sprite homeEnterText(sf::Sprite sprite, int alpha_nbr){
 }
 
 
-///montrer que je sais faire des formes et du texte
-void shapesDemo(sf::RenderWindow& window, sf::Clock& clock, int& display_key){
-    string path = "../../";
-
-    sf::Font font;
-    if(!font.loadFromFile(path + "resources/BalooBhaina2-Medium.ttf")){
-        cerr << "erreur chargement font" << endl;
-    }
-    sf::Text text;
-    text.setFont(font);
-    text.setString("Voila, je sais afficher des formes (et du texte du coup), \n mais pour la suite c'est que des sprites !");
-    text.setCharacterSize(30);
-    text.setFillColor(sf::Color::White);
-    text.setPosition(sf::Vector2f(200, 50));
-
-    if(clock.getElapsedTime().asSeconds() < 1){
-        sf::RectangleShape rect(sf::Vector2f(400, 200));
-        rect.setFillColor(sf::Color(200, 0, 0));
-        rect.setPosition(sf::Vector2f(200, 300));
-        sf::CircleShape circle(50, 50);
-        circle.setFillColor(sf::Color(0, 200, 0));
-        circle.setPosition(sf::Vector2f(800, 350));
-        window.draw(text);
-        window.draw(rect);
-        window.draw(circle);
-    } else if(clock.getElapsedTime().asSeconds() > 1){
-        display_key = 2;
-    }
-}
-
-
 void menu(sf::RenderWindow& window, int clic_position, int difficulty_value, sf::Texture& background, sf::Texture& play, sf::Texture& difficulty, sf::Texture& difficulties){
     sf::Sprite background_s(background);
     background_s.setPosition(0,0);

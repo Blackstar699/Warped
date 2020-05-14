@@ -22,6 +22,7 @@ struct Player{
     int sprite_y;
     vector<int> sprite_x;
     int coins;
+    int points;
     float game_time;
     sf::Clock clock;
     sf::Clock game_clock;
@@ -45,7 +46,22 @@ struct Player{
         sprite_y = 0;
         sprite_x = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         coins = 0;
+        points = 0;
         game_time = 0;
+    }
+
+    bool isHit(sf::Vector2i &shoot_size, sf::Vector2f &shoot_pos, int damages){
+        if(((shoot_pos.x + shoot_size.x >= pos.x + 57 && shoot_pos.x <= pos.x + 57) ||
+            (shoot_pos.x + shoot_size.x >= pos.x + 57 && shoot_pos.x <= pos.x + size.x - 57) ||
+            (shoot_pos.x + shoot_size.x >= pos.x + size.x - 57 && shoot_pos.x <= pos.x + size.x - 57)) &&
+            ((shoot_pos.y + shoot_size.y >= pos.y && shoot_pos.y <= pos.y) ||
+            (shoot_pos.y + shoot_size.y >= pos.y && shoot_pos.y <= pos.y + size.y) ||
+            (shoot_pos.y + shoot_size.y >= pos.y + size.y && shoot_pos.y <= pos.y + size.y))){
+            health -= damages;
+            return true;
+        }
+        else
+            return false;
     }
 };
 

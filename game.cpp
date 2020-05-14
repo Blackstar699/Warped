@@ -10,10 +10,10 @@ void gameOver(int& display_key){
 
 ///affiche l'écran gameover
 void gameOverScreen(sf::RenderWindow& window, int& display_key){
-    string path = "../../";
+    string path = "../../resources/";
 
     sf::Font font;
-    if(!font.loadFromFile(path + "resources/BalooBhaina2-Medium.ttf")){
+    if(!font.loadFromFile(path + "BalooBhaina2-Medium.ttf")){
         cerr << "erreur chargement font" << endl;
     }
 
@@ -35,7 +35,7 @@ void gameOverScreen(sf::RenderWindow& window, int& display_key){
     window.draw(returnmenu);
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)){
-        display_key = 2;
+        display_key = 1;
         cout << "Menu principal" << endl;
     }
 }

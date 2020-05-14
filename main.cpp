@@ -33,6 +33,7 @@ int main(){
     vector<PlayerShoots> player_shoots;
     vector<Turrets> turrets;
     std::map<std::pair<int, int>, int> map1_turrets = getMap(path + "maps/map1_turrets.csv");
+    vector<TurretsShoots> turrets_shoots;
     std::map<std::pair<int, int>, int> map1_1 = getMap(path + "maps/map1_1.csv");
     vector<int> tileset1_walls = {25, 31, 32, 37, 43, 44, 49, 55, 56, 67, 68};
     vector<int> tileset1_grounds = {103, 104, 105};
@@ -55,7 +56,9 @@ int main(){
             "Sprites/game/player_shoot.png",
             "Sprites/game/player_shoot_impact.png",
             "Sprites/game/enemy-explosion.png",
-            "Sprites/game/turret.png"
+            "Sprites/game/turret.png",
+            "Sprites/game/turret_shoot.png",
+            "Sprites/game/turret_shoot_impact.png"
     };
 
     for(const auto& file : files){
@@ -75,7 +78,7 @@ int main(){
             if(event.type == sf::Event::KeyPressed){
                 if(display_key == 0)
                     homeEvents(event, display_key, shapes_clock);
-                else if(display_key == 2)
+                else if(display_key == 1)
                     menuEvents(event, display_key, difficulty_value, menu_clic_position, player, map1_turrets, turrets);
             }
         }
@@ -87,10 +90,6 @@ int main(){
                 break;
 
             case 1:
-                shapesDemo(window, shapes_clock, display_key);
-                break;
-
-            case 2:
                 menu(window, menu_clic_position, difficulty_value, textures[2], textures[3], textures[4], textures[5]);
                 break;
 
@@ -110,8 +109,10 @@ int main(){
                 turretsDisplay(window, turrets, player, textures[12], textures[11]);
                 ///Ennemis
                 playerDisplay(window, player, textures[8]);
+                turretsShoots(player, turrets, turrets_shoots);
+                turretsShootsDisplay(window, turrets_shoots, player, map1_1_walls, textures[13], textures[14]);
                 ///tirs ennemis
-                playerShootsDisplay(window, player_shoots, player.pos, map1_1_walls, textures[9], textures[10], turrets);
+                playerShootsDisplay(window, player_shoots, player, map1_1_walls, textures[9], textures[10], turrets);
                 window.setView(window.getDefaultView());
                 playerHUD(window, player);
                 playerIsAlive(player.health, display_key);

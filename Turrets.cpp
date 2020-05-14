@@ -1,5 +1,6 @@
 #include "Turrets.h"
 
+///Default Constructor
 Turrets::Turrets(sf::Vector2f _pos, int _health): pos(_pos), health(20 * _health){}
 
 ///affiche la tourelle/explosion a la bonne position et dans le bon sens
@@ -41,17 +42,49 @@ void Turrets::setDirection(int player_size_x, int player_pos_x){
     }
 }
 
-bool Turrets::isHit(sf::Vector2i &shoot_size, sf::Vector2f &shoot_pos, int damages){
-    if(((shoot_pos.x + shoot_size.x >= pos.x + 10 && shoot_pos.x <= pos.x + 10) ||
-    (shoot_pos.x + shoot_size.x >= pos.x + 10 && shoot_pos.x <= pos.x + size.x - 10) ||
-    (shoot_pos.x + shoot_size.x >= pos.x + size.x - 10 && shoot_pos.x <= pos.x + size.x - 10)) &&
-    ((shoot_pos.y + shoot_size.y >= pos.y && shoot_pos.y <= pos.y) ||
-    (shoot_pos.y + shoot_size.y >= pos.y + size.y && shoot_pos.y <= pos.y + size.y))){
-        health -= damages;
-        if(health <= 0)
-            alive = false;
+bool Turrets::isHit(Player& player, sf::Vector2i &shoot_size, sf::Vector2f &shoot_pos, int damages){
+    if(alive){
+        if(((shoot_pos.x + shoot_size.x >= pos.x + 10 && shoot_pos.x <= pos.x + 10) ||
+            (shoot_pos.x + shoot_size.x >= pos.x + 10 && shoot_pos.x <= pos.x + size.x - 10) ||
+            (shoot_pos.x + shoot_size.x >= pos.x + size.x - 10 && shoot_pos.x <= pos.x + size.x - 10)) &&
+           ((shoot_pos.y + shoot_size.y >= pos.y && shoot_pos.y <= pos.y) ||
+            (shoot_pos.y + shoot_size.y >= pos.y + size.y && shoot_pos.y <= pos.y + size.y))){
+            health -= damages;
+            if(health <= 0){
+                alive = false;
+                player.points += 50;
+            }
+            return true;
+        }
+        else
+            return false;
+    }
+    else
+        return false;
+}
+
+bool Turrets::isNextToPlayer(sf::Vector2f p_size, sf::Vector2f p_pos){
+    if((p_pos.x + p_size.x >= pos.x - 400 || p_pos.x <= pos.x + size.x + 400) &&
+    (p_pos.y + p_size.y >= pos.y && p_pos.y + p_size.y <= pos.y + size.y)){
         return true;
     }
     else
         return false;
+}
+
+bool Turrets::canShoot(){
+    if(shoot_clock.getElapsedTime().asMilliseconds() >= 2000){
+        shoot_clock.restart();
+        return true;
+    }
+    else
+        return false;
+}
+
+int Turrets::returnDirection(){
+    return direction;
+}
+
+sf::Vector2f Turrets::returnPos(){
+    return pos;
 }

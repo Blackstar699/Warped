@@ -107,7 +107,8 @@ void playerCollisions(Player& player, vector<sf::Vector2i>& walls, vector<sf::Ve
 
 ///affiche les informations du joueur pendant la partie, comme la vie ou le temps écoulé
 void playerHUD(sf::RenderWindow& window, Player& player){
-    string path = "../../";
+    string path = "../../resources/";
+
     player.game_time = player.game_clock.getElapsedTime().asSeconds();
     int mins = floor(player.game_time / 60);
     int secs = floor(player.game_time - 60 * mins);
@@ -115,6 +116,10 @@ void playerHUD(sf::RenderWindow& window, Player& player){
     game_time += std::to_string(mins);
     game_time += " : ";
     game_time += std::to_string(secs);
+
+    string player_points;
+    player_points += std::to_string(player.points);
+    player_points += " pts";
 
     sf::RectangleShape hp1(sf::Vector2f(304, 24));
     hp1.setFillColor(sf::Color::White);
@@ -124,8 +129,9 @@ void playerHUD(sf::RenderWindow& window, Player& player){
     hp2.setPosition(sf::Vector2f(12, 12));
 
     sf::Font font;
-    if(!font.loadFromFile(path + "resources/BalooBhaina2-Medium.ttf"))
+    if(!font.loadFromFile(path + "BalooBhaina2-Medium.ttf"))
         cerr << "erreur chargement font" << endl;
+
     sf::Text gametime;
     gametime.setFont(font);
     gametime.setString(game_time);
@@ -133,14 +139,22 @@ void playerHUD(sf::RenderWindow& window, Player& player){
     gametime.setFillColor(sf::Color::White);
     gametime.setPosition(sf::Vector2f(10, 40));
 
+    sf::Text playerpoints;
+    playerpoints.setFont(font);
+    playerpoints.setString(player_points);
+    playerpoints.setCharacterSize(25);
+    playerpoints.setFillColor(sf::Color::White);
+    playerpoints.setPosition(sf::Vector2f(10, 80));
+
     window.draw(hp1);
     window.draw(hp2);
     window.draw(gametime);
+    window.draw(playerpoints);
 }
 
 
 ///affichage des tirs du joueur
-void playerShootsDisplay(sf::RenderWindow& window, vector<PlayerShoots>& player_shoots, sf::Vector2f player_pos, vector<sf::Vector2i>& walls, sf::Texture& texture_1, sf::Texture& texture_2, vector<Turrets>& turrets){
+void playerShootsDisplay(sf::RenderWindow& window, vector<PlayerShoots>& player_shoots, Player& player, vector<sf::Vector2i>& walls, sf::Texture& texture_1, sf::Texture& texture_2, vector<Turrets>& turrets){
     int pos = 0;
     sf::Sprite sprite_1(texture_1);
     sf::Sprite sprite_2(texture_2);
@@ -149,8 +163,8 @@ void playerShootsDisplay(sf::RenderWindow& window, vector<PlayerShoots>& player_
 
     for(auto& shoot : player_shoots){
         shoot.wallCollisions(walls);
-        bool delete_shoot1 = shoot.isOnScreen(player_pos);
-        shoot.ennemiesCollisions(turrets);
+        bool delete_shoot1 = shoot.isOnScreen(player.pos);
+        shoot.ennemiesCollisions(player, turrets);
         bool delete_shoot2 = shoot.display(window, sprite_1, sprite_2);
         shoot.move();
         if(!delete_shoot1 || delete_shoot2)
@@ -158,7 +172,10 @@ void playerShootsDisplay(sf::RenderWindow& window, vector<PlayerShoots>& player_
         pos++;
     }
 
+    int pos2 = 0;
     for(auto& shoot : deletes){
+        shoot -= pos2;
         player_shoots.erase(player_shoots.begin() + shoot);
+        pos2++;
     }
 }
