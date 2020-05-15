@@ -1,9 +1,9 @@
 #include "includes.h"
-#include "events.h"
-#include "menus.h"
-#include "environment.h"
-#include "player.h"
-#include "ennemies.h"
+#include "fonctions/events.h"
+#include "fonctions/menus.h"
+#include "game/environment.h"
+#include "game/player.h"
+#include "ennemies/ennemies.h"
 
 
 int main(){

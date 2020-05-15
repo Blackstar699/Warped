@@ -1,8 +1,8 @@
 #ifndef WARPED_ENVIRONMENT_H
 #define WARPED_ENVIRONMENT_H
 
-#include "includes.h"
-#include "fonctions.h"
+#include "../includes.h"
+#include "../fonctions/fonctions.h"
 
 void background(sf::RenderWindow& window, sf::Texture& texture);
 void environment(sf::RenderWindow& window, const std::map<std::pair<int, int>, int>& map, sf::Vector2f player_pos, sf::Texture& texture);

@@ -1,8 +1,8 @@
 #ifndef WARPED_TURRETS_H
 #define WARPED_TURRETS_H
 
-#include "includes.h"
-#include "fonctions.h"
+#include "../includes.h"
+#include "../fonctions/fonctions.h"
 
 class Turrets{
 private:

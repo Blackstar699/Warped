@@ -1,8 +1,8 @@
 #ifndef WARPED_GAME_H
 #define WARPED_GAME_H
 
-#include "includes.h"
-#include "Turrets.h"
+#include "../includes.h"
+#include "../ennemies/Turrets.h"
 
 void gameOver(int& display_key);
 void gameOverScreen(sf::RenderWindow& window, int& display_key);

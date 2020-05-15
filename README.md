@@ -2,7 +2,6 @@ Prérequis:
 - adapter les variables path dans:
     - main.cpp
     - game.cpp
-    - menus.cpp
     - player.cpp
 
 Ressources:

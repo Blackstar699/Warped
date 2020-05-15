@@ -1,7 +1,7 @@
 #ifndef WARPED_MENUS_H
 #define WARPED_MENUS_H
 
-#include "includes.h"
+#include "../includes.h"
 #include "fonctions.h"
 
 sf::Sprite homeEnterText(sf::Sprite sprite, int alpha);

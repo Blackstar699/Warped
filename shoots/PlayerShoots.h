@@ -1,10 +1,10 @@
 #ifndef WARPED_PLAYERSHOOTS_H
 #define WARPED_PLAYERSHOOTS_H
 
-#include "includes.h"
+#include "../includes.h"
 #include "Shoots.h"
-#include "fonctions.h"
-#include "ennemies.h"
+#include "../fonctions/fonctions.h"
+#include "../ennemies/ennemies.h"
 
 class PlayerShoots : public Shoots{
 private:

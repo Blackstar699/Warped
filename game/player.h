@@ -1,9 +1,9 @@
 #ifndef WARPED_PLAYER_H
 #define WARPED_PLAYER_H
 
-#include "includes.h"
+#include "../includes.h"
 #include "game.h"
-#include "PlayerShoots.h"
+#include "../shoots/PlayerShoots.h"
 
 void playerDisplay(sf::RenderWindow& window, Player& player, sf::Texture& psg);
 void playerReset(vector<int>& sprite_x, int sprite_y);
