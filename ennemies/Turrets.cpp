@@ -42,6 +42,7 @@ void Turrets::setDirection(int player_size_x, int player_pos_x){
     }
 }
 
+///vérifie si la tourelle est touchée par un tir du joueur
 bool Turrets::isHit(Player& player, sf::Vector2i &shoot_size, sf::Vector2f &shoot_pos, int damages){
     if(alive){
         if(((shoot_pos.x + shoot_size.x >= pos.x + 10 && shoot_pos.x <= pos.x + 10) ||

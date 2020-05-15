@@ -3,6 +3,7 @@
 ///Default Constructor
 Drones::Drones(sf::Vector2f _pos, int _health): pos(_pos), health(10 * _health){}
 
+///affiche le drone/explosion a la bonne position et dans le bon sens
 bool Drones::display(sf::RenderWindow &window, sf::Sprite &sprite_1, sf::Sprite &sprite_2){
     if(alive){
         if(sprite_clock.getElapsedTime().asMilliseconds() >= 50){
@@ -41,7 +42,7 @@ void Drones::setDirection(int player_size_x, int player_pos_x){
     }
 }
 
-
+///fait bouger le drone de haut en bas
 void Drones::move(){
     if(move_pos <= 20 && move_direction == 1){
         if(move_pos != 20){
@@ -59,4 +60,27 @@ void Drones::move(){
         else
             move_direction = 1;
     }
+}
+
+///vérifie si la tourelle est touchée par un tir du joueur
+bool Drones::isHit(Player &player, sf::Vector2i &shoot_size, sf::Vector2f &shoot_pos, int damages){
+    if(alive){
+        if(((shoot_pos.x + shoot_size.x >= pos.x + 15 && shoot_pos.x <= pos.x + 15) ||
+            (shoot_pos.x + shoot_size.x >= pos.x + 15 && shoot_pos.x <= pos.x + size.x - 15) ||
+            (shoot_pos.x + shoot_size.x >= pos.x + size.x - 15 && shoot_pos.x <= pos.x + size.x - 15)) &&
+            ((shoot_pos.y + shoot_size.y >= pos.y && shoot_pos.y <= pos.y) ||
+            (shoot_pos.y + shoot_size.y >= pos.y && shoot_pos.y <= pos.y + size.y) ||
+            (shoot_pos.y + shoot_size.y >= pos.y + size.y && shoot_pos.y <= pos.y + size.y))){
+            health -= damages;
+            if(health <= 0){
+                alive = false;
+                player.points += 60;
+            }
+            return true;
+        }
+        else
+            return false;
+    }
+    else
+        return false;
 }

@@ -117,7 +117,7 @@ int main(){
                 turretsShoots(player, turrets, turrets_shoots);
                 turretsShootsDisplay(window, turrets_shoots, player, map1_1_walls, textures[13], textures[14]);
                 ///tirs ennemis
-                playerShootsDisplay(window, player_shoots, player, map1_1_walls, textures[9], textures[10], turrets);
+                playerShootsDisplay(window, player_shoots, player, map1_1_walls, textures[9], textures[10], turrets, drones);
                 window.setView(window.getDefaultView());
                 playerHUD(window, player);
                 playerIsAlive(player.health, display_key);

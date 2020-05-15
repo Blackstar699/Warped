@@ -22,6 +22,7 @@ public:
     bool display(sf::RenderWindow& window, sf::Sprite& sprite_1, sf::Sprite& sprite_2);
     void setDirection(int player_size_x, int player_pos_x);
     void move();
+    bool isHit(Player& player, sf::Vector2i& shoot_size, sf::Vector2f& shoot_pos, int damages);
 };
 
 #endif //WARPED_DRONES_H
