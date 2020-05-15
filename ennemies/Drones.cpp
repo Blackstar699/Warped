@@ -1,7 +1,7 @@
 #include "Drones.h"
 
 ///Default Constructor
-Drones::Drones(sf::Vector2f _pos, int _health): pos(_pos), health(10 * _health){}
+Drones::Drones(sf::Vector2f _pos, int _health): pos(_pos), health(20 * _health){}
 
 ///affiche le drone/explosion a la bonne position et dans le bon sens
 bool Drones::display(sf::RenderWindow &window, sf::Sprite &sprite_1, sf::Sprite &sprite_2){
@@ -83,4 +83,31 @@ bool Drones::isHit(Player &player, sf::Vector2i &shoot_size, sf::Vector2f &shoot
     }
     else
         return false;
+}
+
+
+bool Drones::isNextToPlayer(sf::Vector2f p_size, sf::Vector2f p_pos){
+    if((p_pos.x + p_size.x >= pos.x - 300 || p_pos.x <= pos.x + size.x + 300) &&
+       (pos.y + size.y >= p_pos.y && pos.y + size.y <= p_pos.y + p_size.y)){
+        return true;
+    }
+    else
+        return false;
+}
+
+bool Drones::canShoot(){
+    if(shoot_clock.getElapsedTime().asMilliseconds() >= 1000){
+        shoot_clock.restart();
+        return true;
+    }
+    else
+        return false;
+}
+
+int Drones::returnDirection(){
+    return direction;
+}
+
+sf::Vector2f Drones::returnPos(){
+    return pos;
 }

@@ -36,7 +36,7 @@ int main(){
     vector<TurretsShoots> turrets_shoots;
     vector<Drones> drones;
     std::map<std::pair<int, int>, int> map1_drones = getMap(path + "maps/map1_drones.csv");
-//    vector<DronesShoots> drones_shoots;
+    vector<DronesShoots> drones_shoots;
     std::map<std::pair<int, int>, int> map1_1 = getMap(path + "maps/map1_1.csv");
     vector<int> tileset1_walls = {25, 31, 32, 37, 43, 44, 49, 55, 56, 67, 68};
     vector<int> tileset1_grounds = {103, 104, 105};
@@ -116,6 +116,8 @@ int main(){
                 playerDisplay(window, player, textures[8]);
                 turretsShoots(player, turrets, turrets_shoots);
                 turretsShootsDisplay(window, turrets_shoots, player, map1_1_walls, textures[13], textures[14]);
+                dronesShoots(player, drones, drones_shoots);
+                dronesShootsDisplay(window, drones_shoots, player, map1_1_walls, textures[13], textures[14]);
                 ///tirs ennemis
                 playerShootsDisplay(window, player_shoots, player, map1_1_walls, textures[9], textures[10], turrets, drones);
                 window.setView(window.getDefaultView());

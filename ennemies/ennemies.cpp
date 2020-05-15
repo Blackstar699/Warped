@@ -91,3 +91,44 @@ void dronesDisplay(sf::RenderWindow& window, vector<Drones>& drones, Player& pla
         pos2++;
     }
 }
+
+///détermine si un drone doit tirer
+void dronesShoots(Player& player, vector<Drones>& drones, vector<DronesShoots>& drone_shoots){
+    for(auto& drone : drones){
+        if(drone.isNextToPlayer(player.size, player.pos) && drone.canShoot()){
+            int direction = drone.returnDirection();
+            sf::Vector2f turret_pos = drone.returnPos();
+            if(direction == 0)
+                drone_shoots.push_back(DronesShoots({turret_pos.x + 55 - 30, turret_pos.y + 31}, direction, 5));
+            else if(direction == 1)
+                drone_shoots.push_back(DronesShoots({turret_pos.x + 30, turret_pos.y + 31}, direction, 5));
+        }
+    }
+}
+
+///affiche les tirs des drones
+void dronesShootsDisplay(sf::RenderWindow& window, vector<DronesShoots>& drones_shoots, Player& player, vector<sf::Vector2i>& walls, sf::Texture& texture_1, sf::Texture& texture_2){
+    int pos = 0;
+    sf::Sprite sprite_1(texture_1);
+    sf::Sprite sprite_2(texture_2);
+
+    vector<int> deletes;
+
+    for(auto& shoot : drones_shoots){
+        shoot.wallCollisions(walls);
+        bool delete_shoot1 = shoot.isOnScreen(player.pos);
+        shoot.playerCollisions(player);
+        bool delete_shoot2 = shoot.display(window, sprite_1, sprite_2);
+        shoot.move();
+        if(!delete_shoot1 || delete_shoot2)
+            deletes.push_back(pos);
+        pos++;
+    }
+
+    int pos2 = 0;
+    for(auto& shoot : deletes){
+        shoot -= pos2;
+        drones_shoots.erase(drones_shoots.begin() + shoot);
+        pos2++;
+    }
+}
