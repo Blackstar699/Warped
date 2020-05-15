@@ -55,3 +55,13 @@ void setTurrets(std::map<std::pair<int, int>, int>& map1_turrets, vector<Turrets
         turrets.push_back(Turrets({x * 32, y * 32 - 14}, difficulty_value));
     }
 }
+
+///rempli le vecteur des drones avec le fichier csv correspondant
+void setDrones(std::map<std::pair<int, int>, int>& map1_drones, vector<Drones>& drones, int difficulty_value){
+    drones = {};
+
+    for(auto& turret : map1_drones){
+        const float x = turret.first.first, y = turret.first.second;
+        drones.push_back(Drones({x * 32, y * 32 - 20 - 55}, difficulty_value));
+    }
+}

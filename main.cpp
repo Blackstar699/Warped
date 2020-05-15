@@ -34,6 +34,9 @@ int main(){
     vector<Turrets> turrets;
     std::map<std::pair<int, int>, int> map1_turrets = getMap(path + "maps/map1_turrets.csv");
     vector<TurretsShoots> turrets_shoots;
+    vector<Drones> drones;
+    std::map<std::pair<int, int>, int> map1_drones = getMap(path + "maps/map1_drones.csv");
+//    vector<DronesShoots> drones_shoots;
     std::map<std::pair<int, int>, int> map1_1 = getMap(path + "maps/map1_1.csv");
     vector<int> tileset1_walls = {25, 31, 32, 37, 43, 44, 49, 55, 56, 67, 68};
     vector<int> tileset1_grounds = {103, 104, 105};
@@ -58,7 +61,8 @@ int main(){
             "Sprites/game/enemy-explosion.png",
             "Sprites/game/turret.png",
             "Sprites/game/turret_shoot.png",
-            "Sprites/game/turret_shoot_impact.png"
+            "Sprites/game/turret_shoot_impact.png",
+            "Sprites/game/drone.png"
     };
 
     for(const auto& file : files){
@@ -79,7 +83,7 @@ int main(){
                 if(display_key == 0)
                     homeEvents(event, display_key, shapes_clock);
                 else if(display_key == 1)
-                    menuEvents(event, display_key, difficulty_value, menu_clic_position, player, map1_turrets, turrets);
+                    menuEvents(event, display_key, difficulty_value, menu_clic_position, player, map1_turrets, turrets, map1_drones, drones);
             }
         }
 
@@ -107,6 +111,7 @@ int main(){
                 playerCollisions(player, map1_1_walls, map1_1_grounds, map1_1_ladders);
                 ///props (powerup, pièces, ...)
                 turretsDisplay(window, turrets, player, textures[12], textures[11]);
+                dronesDisplay(window, drones, player, textures[15], textures[11]);
                 ///Ennemis
                 playerDisplay(window, player, textures[8]);
                 turretsShoots(player, turrets, turrets_shoots);

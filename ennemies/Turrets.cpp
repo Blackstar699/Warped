@@ -32,7 +32,7 @@ bool Turrets::display(sf::RenderWindow& window, sf::Sprite &sprite_1, sf::Sprite
     return death_sprite >= 6;
 }
 
-///règle la direction de la tourelle en fonction de la direction du joueur
+///règle la direction de la tourelle en fonction de la position du joueur
 void Turrets::setDirection(int player_size_x, int player_pos_x){
     if(player_pos_x + player_size_x - 50 <= pos.x){
         direction = 1;
