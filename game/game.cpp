@@ -10,10 +10,8 @@ void gameOver(int& display_key){
 
 ///affiche l'écran gameover
 void gameOverScreen(sf::RenderWindow& window, int& display_key){
-    string path = "../../resources/";
-
     sf::Font font;
-    if(!font.loadFromFile(path + "BalooBhaina2-Medium.ttf")){
+    if(!font.loadFromFile("resources/BalooBhaina2-Medium.ttf")){
         cerr << "erreur chargement font" << endl;
     }
 

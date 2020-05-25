@@ -8,3 +8,4 @@ conan_basic_setup()
 
 add_executable(Warped main.cpp fonctions/fonctions.h fonctions/fonctions.cpp fonctions/menus.cpp fonctions/menus.h includes.h fonctions/events.cpp fonctions/events.h game/player.cpp game/player.h fonctions/CSVReader.cpp fonctions/CSVReader.hpp game/environment.cpp game/environment.h game/game.cpp game/game.h shoots/PlayerShoots.cpp shoots/PlayerShoots.h ennemies/Turrets.cpp ennemies/Turrets.h ennemies/ennemies.cpp ennemies/ennemies.h fonctions/fonctions.h shoots/TurretsShoots.cpp shoots/TurretsShoots.h shoots/Shoots.cpp shoots/Shoots.h ennemies/Drones.cpp ennemies/Drones.h shoots/DronesShoots.cpp shoots/DronesShoots.h)
 target_link_libraries(Warped ${CONAN_LIBS})
+add_custom_command(TARGET Warped PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/resources $<TARGET_FILE_DIR:Warped>/resources)

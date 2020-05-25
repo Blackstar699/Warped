@@ -107,7 +107,6 @@ void playerCollisions(Player& player, vector<sf::Vector2i>& walls, vector<sf::Ve
 
 ///affiche les informations du joueur pendant la partie, comme la vie ou le temps écoulé
 void playerHUD(sf::RenderWindow& window, Player& player){
-    string path = "../../resources/";
 
     player.game_time = player.game_clock.getElapsedTime().asSeconds();
     int mins = floor(player.game_time / 60);
@@ -129,7 +128,7 @@ void playerHUD(sf::RenderWindow& window, Player& player){
     hp2.setPosition(sf::Vector2f(12, 12));
 
     sf::Font font;
-    if(!font.loadFromFile(path + "BalooBhaina2-Medium.ttf"))
+    if(!font.loadFromFile("resources/BalooBhaina2-Medium.ttf"))
         cerr << "erreur chargement font" << endl;
 
     sf::Text gametime;

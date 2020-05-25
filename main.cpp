@@ -17,7 +17,7 @@ int main(){
     window.setPosition(sf::Vector2i(360, 190));
 
     //set global
-    string path = "../../resources/";
+    string path = "resources/";
     int display_key = 0;  //définit la partie du jeu qui doit être affichée: 0 = accueil, 1 = menu principal, 10 = jeu, 11 = gameover
     int difficulty_value = 2;
 
