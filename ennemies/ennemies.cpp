@@ -26,15 +26,15 @@ void turretsDisplay(sf::RenderWindow& window, vector<Turrets>& turrets, Player& 
 }
 
 ///détermine si une tourelle doit tirer
-void turretsShoots(Player& player, vector<Turrets>& turrets, vector<TurretsShoots>& turrets_shoots){
+void turretsShoots(Player& player, vector<Turrets>& turrets, vector<TurretsShoots>& turrets_shoots, bool instantdeath){
     for(auto& turret : turrets){
         if(turret.isNextToPlayer(player.size, player.pos) && turret.canShoot()){
             int direction = turret.returnDirection();
             sf::Vector2f turret_pos = turret.returnPos();
             if(direction == 0)
-                turrets_shoots.push_back(TurretsShoots({turret_pos.x + 50 - 10, turret_pos.y + 7}, direction, 5));
+                turrets_shoots.push_back(TurretsShoots({turret_pos.x + 50 - 10, turret_pos.y + 7}, direction, 5, instantdeath));
             else if(direction == 1)
-                turrets_shoots.push_back(TurretsShoots({turret_pos.x + 10, turret_pos.y + 7}, direction, 5));
+                turrets_shoots.push_back(TurretsShoots({turret_pos.x + 10, turret_pos.y + 7}, direction, 5, instantdeath));
         }
     }
 }
@@ -93,15 +93,15 @@ void dronesDisplay(sf::RenderWindow& window, vector<Drones>& drones, Player& pla
 }
 
 ///détermine si un drone doit tirer
-void dronesShoots(Player& player, vector<Drones>& drones, vector<DronesShoots>& drone_shoots){
+void dronesShoots(Player& player, vector<Drones>& drones, vector<DronesShoots>& drone_shoots, bool instantdeath){
     for(auto& drone : drones){
         if(drone.isNextToPlayer(player.size, player.pos) && drone.canShoot()){
             int direction = drone.returnDirection();
             sf::Vector2f turret_pos = drone.returnPos();
             if(direction == 0)
-                drone_shoots.push_back(DronesShoots({turret_pos.x + 55 - 30, turret_pos.y + 31}, direction, 5));
+                drone_shoots.push_back(DronesShoots({turret_pos.x + 55 - 30, turret_pos.y + 31}, direction, 5, instantdeath));
             else if(direction == 1)
-                drone_shoots.push_back(DronesShoots({turret_pos.x + 30, turret_pos.y + 31}, direction, 5));
+                drone_shoots.push_back(DronesShoots({turret_pos.x + 30, turret_pos.y + 31}, direction, 5, instantdeath));
         }
     }
 }

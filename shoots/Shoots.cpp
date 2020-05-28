@@ -1,6 +1,6 @@
 #include "Shoots.h"
 
-///Default constructor
+///Class constructor
 Shoots::Shoots(sf::Vector2f _pos, int _direction, int _speed): pos(_pos), direction(_direction), speed(_speed){}
 
 ///fait avancer le tir dans la bonne direction

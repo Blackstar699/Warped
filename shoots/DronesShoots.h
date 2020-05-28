@@ -10,7 +10,8 @@ private:
     sf::Vector2f pos;
     int damages{5};
 public:
-    explicit DronesShoots(sf::Vector2f _pos, int _direction, int _speed);
+    DronesShoots() = delete;
+    explicit DronesShoots(sf::Vector2f _pos, int _direction, int _speed, bool _instantdeath);
     void playerCollisions(Player& player);
 };
 

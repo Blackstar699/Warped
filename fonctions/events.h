@@ -6,7 +6,7 @@
 #include "../game/game.h"
 
 void homeEvents(sf::Event& event, int& display_key, sf::Clock& clock);
-void menuEvents(sf::Event& event, int& display_key, int& difficulty_value, int& menu_clic_position, Player& player, std::map<std::pair<int, int>, int>& map1_turrets, vector<Turrets>& turrets, std::map<std::pair<int, int>, int>& map1_drones, vector<Drones>& drones);
+void menuEvents(sf::Event& event, int& display_key, int& difficulty_value, bool& instantdeath, int& menu_clic_position, Player& player, std::map<std::pair<int, int>, int>& map1_turrets, vector<Turrets>& turrets, std::map<std::pair<int, int>, int>& map1_drones, vector<Drones>& drones);
 void gameEvents(Player& player, vector<PlayerShoots>& player_shoots);
 
 #endif //WARPED_EVENTS_H

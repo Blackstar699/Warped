@@ -1,6 +1,6 @@
 #include "Turrets.h"
 
-///Default Constructor
+///Class Constructor
 Turrets::Turrets(sf::Vector2f _pos, int _health): pos(_pos), health(20 * _health){}
 
 ///affiche la tourelle/explosion a la bonne position et dans le bon sens

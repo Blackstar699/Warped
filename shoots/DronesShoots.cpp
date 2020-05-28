@@ -1,7 +1,12 @@
 #include "DronesShoots.h"
 
-///Default Constructor
-DronesShoots::DronesShoots(sf::Vector2f _pos, int _direction, int _speed): Shoots(_pos, _direction, _speed), pos(_pos){}
+///Class Constructor
+DronesShoots::DronesShoots(sf::Vector2f _pos, int _direction, int _speed, bool _instantdeath): Shoots(_pos, _direction, _speed), pos(_pos){
+    if(_instantdeath)
+        damages = 100;
+    else
+        damages = 5;
+}
 
 ///Vérifie si les balles touchent le joueur
 void DronesShoots::playerCollisions(Player &player){

@@ -1,6 +1,6 @@
 #include "PlayerShoots.h"
 
-///Default Constructor
+///Class Constructor
 PlayerShoots::PlayerShoots(sf::Vector2f _pos, int _direction, int _speed): Shoots(_pos, _direction, _speed), pos(_pos){}
 
 ///vérifie les collisions entre la balle et les ennemis

@@ -12,6 +12,7 @@ private:
     sf::Vector2f pos;
     int damages{20};
 public:
+    PlayerShoots() = delete;
     explicit PlayerShoots(sf::Vector2f _pos, int _direction, int _speed);
     void ennemiesCollisions(Player& player, vector<Turrets>& turrets, vector<Drones>& drones);
 };

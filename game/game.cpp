@@ -9,7 +9,7 @@ void gameOver(int& display_key){
 
 
 ///affiche l'écran gameover
-void gameOverScreen(sf::RenderWindow& window, int& display_key){
+void gameOverScreen(sf::RenderWindow& window, int& display_key, int& menu_clic_position){
     sf::Font font;
     if(!font.loadFromFile("resources/BalooBhaina2-Medium.ttf")){
         cerr << "erreur chargement font" << endl;
@@ -34,6 +34,7 @@ void gameOverScreen(sf::RenderWindow& window, int& display_key){
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)){
         display_key = 1;
+        menu_clic_position = 2;
         cout << "Menu principal" << endl;
     }
 }

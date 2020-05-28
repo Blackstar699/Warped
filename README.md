@@ -6,4 +6,7 @@ Ressources:
     
 https://jeux.developpez.com/medias/#LVI
 
-Testeur officiel: Romain Biziou
+Modifications:
+- protected sur les classes ?
+- const sur certaines fonctions des classes
+- fonctions en virtual pour surcharger dans les classes ?

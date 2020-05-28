@@ -9,7 +9,7 @@ void homeEvents(sf::Event& event, int& display_key, sf::Clock& clock){
 }
 
 
-void menuEvents(sf::Event& event, int& display_key, int& difficulty_value, int& menu_clic_position, Player& player, std::map<std::pair<int, int>, int>& map1_turrets, vector<Turrets>& turrets, std::map<std::pair<int, int>, int>& map1_drones, vector<Drones>& drones){
+void menuEvents(sf::Event& event, int& display_key, int& difficulty_value, bool& instantdeath, int& menu_clic_position, Player& player, std::map<std::pair<int, int>, int>& map1_turrets, vector<Turrets>& turrets, std::map<std::pair<int, int>, int>& map1_drones, vector<Drones>& drones){
     if(menu_clic_position == 1){
         if(event.key.code == sf::Keyboard::Enter){
             display_key = 10;
@@ -38,6 +38,17 @@ void menuEvents(sf::Event& event, int& display_key, int& difficulty_value, int& 
             difficulty_value--;
         else if(event.key.code == sf::Keyboard::Right && difficulty_value != 4)
             difficulty_value++;
+        else if(event.key.code == sf::Keyboard::Down)
+            menu_clic_position = 3;
+    }
+
+    else if(menu_clic_position == 3){
+        if(event.key.code == sf::Keyboard::Up)
+            menu_clic_position = 2;
+        else if(event.key.code == sf::Keyboard::Left && instantdeath)
+            instantdeath = false;
+        else if(event.key.code == sf::Keyboard::Right && !instantdeath)
+            instantdeath = true;
     }
 }
 

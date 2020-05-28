@@ -25,7 +25,8 @@ int main(){
     int home_alpha_value = 1;
     sf::Clock home_clock;
     sf::Clock shapes_clock;
-    int menu_clic_position = 1;
+    int menu_clic_position = 2;
+    bool instantdeath = false;
 
     //set game
     sf::View player_view;
@@ -62,7 +63,9 @@ int main(){
             "Sprites/game/turret.png",
             "Sprites/game/turret_shoot.png",
             "Sprites/game/turret_shoot_impact.png",
-            "Sprites/game/drone.png"
+            "Sprites/game/drone.png",
+            "Sprites/menu/instantdeath.png",
+            "Sprites/menu/yesno.png"
     };
 
     for(const auto& file : files){
@@ -83,7 +86,7 @@ int main(){
                 if(display_key == 0)
                     homeEvents(event, display_key, shapes_clock);
                 else if(display_key == 1)
-                    menuEvents(event, display_key, difficulty_value, menu_clic_position, player, map1_turrets, turrets, map1_drones, drones);
+                    menuEvents(event, display_key, difficulty_value, instantdeath, menu_clic_position, player, map1_turrets, turrets, map1_drones, drones);
             }
         }
 
@@ -94,7 +97,7 @@ int main(){
                 break;
 
             case 1:
-                menu(window, menu_clic_position, difficulty_value, textures[2], textures[3], textures[4], textures[5]);
+                menu(window, menu_clic_position, difficulty_value, instantdeath, textures[2], textures[3], textures[4], textures[5], textures[16], textures[17]);
                 break;
 
             case 10:
@@ -114,9 +117,9 @@ int main(){
                 dronesDisplay(window, drones, player, textures[15], textures[11]);
                 ///Ennemis
                 playerDisplay(window, player, textures[8]);
-                turretsShoots(player, turrets, turrets_shoots);
+                turretsShoots(player, turrets, turrets_shoots, instantdeath);
                 turretsShootsDisplay(window, turrets_shoots, player, map1_1_walls, textures[13], textures[14]);
-                dronesShoots(player, drones, drones_shoots);
+                dronesShoots(player, drones, drones_shoots, instantdeath);
                 dronesShootsDisplay(window, drones_shoots, player, map1_1_walls, textures[13], textures[14]);
                 ///tirs ennemis
                 playerShootsDisplay(window, player_shoots, player, map1_1_walls, textures[9], textures[10], turrets, drones);
@@ -128,7 +131,7 @@ int main(){
                 break;
 
             case 11:
-                gameOverScreen(window, display_key);
+                gameOverScreen(window, display_key, menu_clic_position);
                 break;
 
             default:

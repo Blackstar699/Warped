@@ -6,6 +6,6 @@
 
 sf::Sprite homeEnterText(sf::Sprite sprite, int alpha);
 void home(sf::RenderWindow& window, int& home_alpha_value, sf::Clock& clock, sf::Texture& background, sf::Texture& enter);
-void menu(sf::RenderWindow& window, int clic_position, int difficulty_value, sf::Texture& background, sf::Texture& play, sf::Texture& difficulty, sf::Texture& difficulties);
+void menu(sf::RenderWindow& window, int clic_position, int difficulty_value, bool instantdeath_value, sf::Texture& background, sf::Texture& play, sf::Texture& difficulty, sf::Texture& difficulties, sf::Texture& instantdeath, sf::Texture& yes_no);
 
 #endif //WARPED_MENUS_H

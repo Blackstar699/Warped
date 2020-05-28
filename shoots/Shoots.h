@@ -12,6 +12,7 @@ private:
     bool hit{false};
     int hit_sprite{0};
 public:
+    Shoots() = delete;
     explicit Shoots(sf::Vector2f _pos, int _direction, int _speed);
     void move();
     bool display(sf::RenderWindow& window, sf::Sprite& sprite_1, sf::Sprite& sprite_2);

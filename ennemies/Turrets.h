@@ -16,6 +16,7 @@ private:
     sf::Clock sprite_clock;
     sf::Clock shoot_clock;
 public:
+    Turrets() = delete;
     explicit Turrets(sf::Vector2f _pos, int _health);
     bool display(sf::RenderWindow& window, sf::Sprite& sprite_1, sf::Sprite& sprite_2);
     void setDirection(int player_size_x, int player_pos_x);
