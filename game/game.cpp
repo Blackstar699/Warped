@@ -9,27 +9,39 @@ void gameOver(int& display_key){
 
 
 ///affiche l'écran gameover
-void gameOverScreen(sf::RenderWindow& window, int& display_key, int& menu_clic_position){
+void gameOverScreen(sf::RenderWindow& window, int& display_key, int& menu_clic_position, Player& player, sf::Texture& background){
     sf::Font font;
     if(!font.loadFromFile("resources/BalooBhaina2-Medium.ttf")){
         cerr << "erreur chargement font" << endl;
     }
 
+    sf::Sprite background_s(background);
+
     sf::Text gameover;
     gameover.setFont(font);
     gameover.setString("Game Over !");
     gameover.setCharacterSize(150);
-    gameover.setFillColor(sf::Color::White);
+    gameover.setFillColor(sf::Color(0xfcb824ff));
     gameover.setPosition(sf::Vector2f(200, 50));
+
+    sf::Text points;
+    points.setFont(font);
+    string points_string = "SCORE: " + std::to_string(player.points) + "pts";
+    points.setString(points_string);
+    points.setCharacterSize(50);
+    points.setFillColor(sf::Color(0xfcb824ff));
+    points.setPosition(sf::Vector2f(450, 250));
 
     sf::Text returnmenu;
     returnmenu.setFont(font);
     returnmenu.setString("Press Enter to return to the menu");
     returnmenu.setCharacterSize(30);
-    returnmenu.setFillColor(sf::Color::White);
-    returnmenu.setPosition(sf::Vector2f(400, 500));
+    returnmenu.setFillColor(sf::Color(0xfcb824ff));
+    returnmenu.setPosition(sf::Vector2f(400, 350));
 
+    window.draw(background_s);
     window.draw(gameover);
+    window.draw(points);
     window.draw(returnmenu);
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)){

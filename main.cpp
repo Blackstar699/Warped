@@ -131,7 +131,7 @@ int main(){
                 break;
 
             case 11:
-                gameOverScreen(window, display_key, menu_clic_position);
+                gameOverScreen(window, display_key, menu_clic_position, player, textures[6]);
                 break;
 
             default:

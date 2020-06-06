@@ -41,6 +41,8 @@ void setPlayerView(sf::View& view, sf::Vector2i screen_size, sf::Vector2f player
     position.y = player_pos.y + 66 - screen_size.y/1.5f;
     if(position.x <= 0)
         position.x = 0;
+    else if(position.x + screen_size.x >= 11776)
+        position.x = 11776 - screen_size.x;
     if(position.y + screen_size.y >= 352)
         position.y = 352 - screen_size.y;
     view.reset(sf::FloatRect(position.x, position.y, screen_size.x, screen_size.y));
