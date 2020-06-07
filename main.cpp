@@ -18,7 +18,7 @@ int main(){
 
     //set global
     string path = "resources/";
-    int display_key = 0;  //définit la partie du jeu qui doit être affichée: 0 = accueil, 1 = menu principal, 10 = jeu, 11 = gameover
+    int display_key = 0;  //définit la partie du jeu qui doit être affichée: 0 = accueil, 1 = menu principal, 10 = jeu, 11 = gameover, 12 = game win
     int difficulty_value = 2;
 
     //set home/menu
@@ -46,7 +46,7 @@ int main(){
     vector<sf::Vector2i> map1_1_grounds = untraversablesTileset1(map1_1, tileset1_grounds);
     vector<sf::Vector2i> map1_1_ladders = untraversablesTileset1(map1_1, tileset1_ladders);
     std::map<std::pair<int, int>, int> map1_2 = getMap(path + "maps/map1_2.csv");
-    vector<sf::Texture> textures;
+
     vector<string> files = {
             "Sprites/home/background.png",
             "Sprites/home/press-enter.png",
@@ -67,7 +67,7 @@ int main(){
             "Sprites/menu/instantdeath.png",
             "Sprites/menu/yesno.png"
     };
-
+    vector<sf::Texture> textures;
     for(const auto& file : files){
         sf::Texture texture = loadTexture(path + file);
         textures.push_back(texture);
@@ -101,37 +101,33 @@ int main(){
                 break;
 
             case 10:
-                ///////////////////////////////////////////////////////////////////////////////////
-                ///////////////////////////////////////////////////////////////////////////////////
                 background(window, textures[6]);
-
                 setPlayerView(player_view, screen_size, player.pos);
-
                 window.setView(player_view);
                 environment(window, map1_1, player.pos, textures[7]);
                 environment(window, map1_2, player.pos, textures[7]);
                 gameEvents(player, player_shoots);
                 playerCollisions(player, map1_1_walls, map1_1_grounds, map1_1_ladders);
-                ///props (powerup, pièces, ...)
                 turretsDisplay(window, turrets, player, textures[12], textures[11]);
                 dronesDisplay(window, drones, player, textures[15], textures[11]);
-                ///Ennemis
                 playerDisplay(window, player, textures[8]);
                 turretsShoots(player, turrets, turrets_shoots, instantdeath);
                 turretsShootsDisplay(window, turrets_shoots, player, map1_1_walls, textures[13], textures[14]);
                 dronesShoots(player, drones, drones_shoots, instantdeath);
                 dronesShootsDisplay(window, drones_shoots, player, map1_1_walls, textures[13], textures[14]);
-                ///tirs ennemis
                 playerShootsDisplay(window, player_shoots, player, map1_1_walls, textures[9], textures[10], turrets, drones);
                 window.setView(window.getDefaultView());
                 playerHUD(window, player);
                 playerIsAlive(player.health, display_key);
-                ///////////////////////////////////////////////////////////////////////////////////
-                ///////////////////////////////////////////////////////////////////////////////////
+                gameIsWin(player, display_key);
                 break;
 
             case 11:
                 gameOverScreen(window, display_key, menu_clic_position, player, textures[6]);
+                break;
+
+            case 12:
+                gameWinScreen(window, display_key, menu_clic_position, player, textures[6]);
                 break;
 
             default:

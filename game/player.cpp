@@ -112,8 +112,12 @@ void playerHUD(sf::RenderWindow& window, Player& player){
     int mins = floor(player.game_time / 60);
     int secs = floor(player.game_time - 60 * mins);
     string game_time;
+    if(mins < 10)
+        game_time += "0";
     game_time += std::to_string(mins);
-    game_time += " : ";
+    game_time += ":";
+    if(secs < 10)
+        game_time += "0";
     game_time += std::to_string(secs);
 
     string player_points;

@@ -17,7 +17,6 @@ public:
     void move();
     bool display(sf::RenderWindow& window, sf::Sprite& sprite_1, sf::Sprite& sprite_2);
     void wallCollisions(vector<sf::Vector2i>& walls);
-//    void ennemiesCollisions(Player& player, vector<Turrets>& turrets);
     bool isOnScreen(sf::Vector2f player_pos);
     bool isHit();
     void isHit(bool state);

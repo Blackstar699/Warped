@@ -4,7 +4,7 @@
 Drones::Drones(sf::Vector2f _pos, int _health): pos(_pos), health(20 * _health){}
 
 ///affiche le drone/explosion a la bonne position et dans le bon sens
-bool Drones::display(sf::RenderWindow &window, sf::Sprite &sprite_1, sf::Sprite &sprite_2){
+bool Drones::display(sf::RenderWindow& window, sf::Sprite &sprite_1, sf::Sprite &sprite_2){
     if(alive){
         if(sprite_clock.getElapsedTime().asMilliseconds() >= 50){
             sprite_clock.restart();
