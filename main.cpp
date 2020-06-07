@@ -127,7 +127,7 @@ int main(){
                 break;
 
             case 12:
-                gameWinScreen(window, display_key, menu_clic_position, player, textures[6]);
+                gameWinScreen(window, display_key, menu_clic_position, player, textures[6], difficulty_value, instantdeath);
                 break;
 
             default:

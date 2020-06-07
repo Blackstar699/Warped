@@ -90,7 +90,7 @@ void gameEvents(Player& player, vector<PlayerShoots>& player_shoots){
             if(!player.ladder){
                 player.pos.y += player.speed * 2;
                 player.fall++;
-                if(player.fall >= 35)
+                if(player.fall >= 60)
                     player.health = 0;
             }
         }
@@ -132,7 +132,6 @@ void gameEvents(Player& player, vector<PlayerShoots>& player_shoots){
                             player.pos.x += player.speed;
                             player.sprite_y = 6;
                             player.direction = 0;
-//                            cout << "x: " << player.pos.x << endl;
                             if(shoot){
                                 player.shoot_clock.restart();
                                 player_shoots.push_back(PlayerShoots({player.pos.x + 126, player.pos.y + 56}, player.direction, 15));
@@ -144,7 +143,6 @@ void gameEvents(Player& player, vector<PlayerShoots>& player_shoots){
                                 player.pos.x = 0;
                             player.sprite_y = 6;
                             player.direction = 1;
-//                            cout << "x: " << player.pos.x << endl;
                             if(shoot){
                                 player.shoot_clock.restart();
                                 player_shoots.push_back(PlayerShoots({player.pos.x + 16 - 6, player.pos.y + 56}, player.direction, 15));
@@ -177,7 +175,6 @@ void gameEvents(Player& player, vector<PlayerShoots>& player_shoots){
                             player.pos.x += player.speed;
                             player.sprite_y = 4;
                             player.direction = 0;
-//                            cout << "x: " << player.pos.x << endl;
                         }
                         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
                             player.pos.x -= player.speed;
@@ -185,7 +182,6 @@ void gameEvents(Player& player, vector<PlayerShoots>& player_shoots){
                                 player.pos.x = 0;
                             player.sprite_y = 4;
                             player.direction = 1;
-//                            cout << "x: " << player.pos.x << endl;
                         }
                         if(!sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
                             player.sprite_y = 0;
@@ -211,7 +207,7 @@ void gameEvents(Player& player, vector<PlayerShoots>& player_shoots){
                         player.jump = false;
                     else{
                         player.fall++;
-                        if(player.fall >= 35)
+                        if(player.fall >= 60)
                             player.health = 0;
                         if(sf::Keyboard::isKeyPressed(sf::Keyboard::X)){
                             if(shoot){
@@ -228,14 +224,12 @@ void gameEvents(Player& player, vector<PlayerShoots>& player_shoots){
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
                 player.pos.x += player.speed * 2;
                 player.direction = 0;
-//                cout << "x: " << player.pos.x << endl;
             }
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
                 player.pos.x -= player.speed * 2;
                 if(player.pos.x <= 0)
                     player.pos.x = 0;
                 player.direction = 1;
-//                cout << "x: " << player.pos.x << endl;
             }
         }
     }

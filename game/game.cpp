@@ -70,7 +70,7 @@ void gameWin(int& display_key){
 
 
 ///affiche l'écran game win
-void gameWinScreen(sf::RenderWindow& window, int& display_key, int& menu_clic_position, Player& player, sf::Texture& background){
+void gameWinScreen(sf::RenderWindow& window, int& display_key, int& menu_clic_position, Player& player, sf::Texture& background, int difficulty_value, bool instantdeath){
     sf::Font font;
     if(!font.loadFromFile("resources/BalooBhaina2-Medium.ttf")){
         cerr << "erreur chargement font" << endl;
@@ -96,13 +96,26 @@ void gameWinScreen(sf::RenderWindow& window, int& display_key, int& menu_clic_po
     gamewin.setFillColor(sf::Color(0xfcb824ff));
     gamewin.setPosition(sf::Vector2f(250, 10));
 
+    sf::Text gamemode;
+    gamemode.setFont(font);
+    string instantdeath_string;
+    if(instantdeath)
+        instantdeath_string = ", instant death";
+    else
+        instantdeath_string = "";
+    string gamemode_string = "DIFFICULTY: " + std::to_string(difficulty_value) + "/4" + instantdeath_string;
+    gamemode.setString(gamemode_string);
+    gamemode.setCharacterSize(50);
+    gamemode.setFillColor(sf::Color(0xfcb824ff));
+    gamemode.setPosition(sf::Vector2f(450, 200));
+
     sf::Text gametime;
     gametime.setFont(font);
     string gametime_string = "TIME: " + game_time;
     gametime.setString(gametime_string);
     gametime.setCharacterSize(50);
     gametime.setFillColor(sf::Color(0xfcb824ff));
-    gametime.setPosition(sf::Vector2f(450, 200));
+    gametime.setPosition(sf::Vector2f(450, 250));
 
     sf::Text hp;
     hp.setFont(font);
@@ -110,7 +123,7 @@ void gameWinScreen(sf::RenderWindow& window, int& display_key, int& menu_clic_po
     hp.setString(hp_string);
     hp.setCharacterSize(50);
     hp.setFillColor(sf::Color(0xfcb824ff));
-    hp.setPosition(sf::Vector2f(450, 250));
+    hp.setPosition(sf::Vector2f(450, 300));
 
     sf::Text points;
     points.setFont(font);
@@ -118,14 +131,14 @@ void gameWinScreen(sf::RenderWindow& window, int& display_key, int& menu_clic_po
     points.setString(points_string);
     points.setCharacterSize(50);
     points.setFillColor(sf::Color(0xfcb824ff));
-    points.setPosition(sf::Vector2f(450, 300));
+    points.setPosition(sf::Vector2f(450, 350));
 
     sf::Text returnmenu;
     returnmenu.setFont(font);
     returnmenu.setString("Press Enter to return to the menu");
     returnmenu.setCharacterSize(30);
     returnmenu.setFillColor(sf::Color(0xfcb824ff));
-    returnmenu.setPosition(sf::Vector2f(400, 400));
+    returnmenu.setPosition(sf::Vector2f(400, 450));
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)){
         display_key = 1;
@@ -134,6 +147,7 @@ void gameWinScreen(sf::RenderWindow& window, int& display_key, int& menu_clic_po
     }
 
     window.draw(background_s);
+    window.draw(gamemode);
     window.draw(gamewin);
     window.draw(gametime);
     window.draw(hp);
